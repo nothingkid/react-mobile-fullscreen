@@ -1,0 +1,40 @@
+{
+    "name": "react-mobile-fullscreen",
+    "version": "1.0.0",
+    "description": "fullscreen manager for mobile devices",
+    "author": "nothingkid",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nothingkid/react-mobile-fullscreen.git"
+    },
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "peerDependencies": {
+        "react": "^17.0.1"
+    },
+    "devDependencies": {
+        "@types/react": "^17.0.0",
+        "@types/react-dom": "^17.0.0",
+        "eslint": "^7.12.0",
+        "eslint-config-prettier": "^6.14.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "eslint-plugin-react": "^7.21.5",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "prettier": "^2.1.2",
+        "typescript": "^4.0.2",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{ts,js}": "eslint --cache --fix",
+        "*.{ts,js,css,md}": "prettier --write"
+    }
+}
