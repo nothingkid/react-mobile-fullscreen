@@ -1,18 +1,24 @@
-import { View } from "..";
+import { View, FullscreenType } from "..";
 import React, { useContext, SetStateAction, Dispatch } from "react";
 import { undefinedContextMsg } from "../services/utils";
 
-export type FullscreenBag = [View, Dispatch<SetStateAction<View>>];
+export interface IFullscreenBag {
+    view: View;
+    setView: Dispatch<SetStateAction<View>>;
+    fullscreenType: FullscreenType;
+    setFullscreenType: Dispatch<SetStateAction<FullscreenType>>;
+}
 
 export interface IFullScreen {
     view: View;
+    fullscreenType: FullscreenType;
 }
 
-export const FullScreenBagContext = React.createContext<FullscreenBag | null>(
+export const FullScreenBagContext = React.createContext<IFullscreenBag | null>(
     null,
 );
 
-export const useFullscreenBagContext = (): FullscreenBag => {
+export const useFullscreenBagContext = (): IFullscreenBag => {
     const fullscreenBag = useContext(FullScreenBagContext);
     if (!fullscreenBag) {
         throw new Error(
@@ -25,5 +31,8 @@ export const useFullscreenBagContext = (): FullscreenBag => {
 
 export const useFullScreenContext = (): IFullScreen => {
     const fullscreenBag = useFullscreenBagContext();
-    return { view: fullscreenBag[0] };
+    return {
+        view: fullscreenBag.view,
+        fullscreenType: fullscreenBag.fullscreenType,
+    };
 };
