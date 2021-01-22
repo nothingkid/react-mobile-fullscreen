@@ -1,16 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import fscreen from "fscreen";
-import { isMobile } from "is-mobile";
-import {
-    FullScreenBagContext,
-    IFullscreenBag,
-} from "./hooks/use-fullscreen-context";
+import { FullScreenBagContext } from "./hooks/use-fullscreen-context";
 import { useState } from "react";
-import { isBrowser } from "./services/utils";
-import { Fallback } from "./components/fallback";
-import { Native } from "./components/native";
-import { MinimalUI } from "./components/minimal-ui";
 import { Container } from "./components/container";
+import { MinimalUI } from "./components/minimal-ui";
 
 export type RequestFullsreen = () => void;
 export type ExitFullscreen = () => void;
@@ -26,15 +19,6 @@ export type MaskComponent = React.ComponentType<IMaskProps>;
 
 const nativeSupported = fscreen.fullscreenElement !== undefined;
 
-let MobileFullscreenComponent: React.FC<IFullscreenBag>;
-if (!isBrowser() || !isMobile()) {
-    MobileFullscreenComponent = Fallback;
-} else if (nativeSupported) {
-    MobileFullscreenComponent = Native;
-} else {
-    MobileFullscreenComponent = MinimalUI;
-}
-
 export { useFullScreenContext } from "./hooks/use-fullscreen-context";
 export type { IFullScreen } from "./hooks/use-fullscreen-context";
 
@@ -43,6 +27,12 @@ export interface IMobileFullscreenProps {
     children: React.ReactNode | React.ReactNodeArray;
 }
 
+const requestFullscreen = () => {
+    if (nativeSupported) {
+        fscreen.requestFullscreen(document.documentElement);
+    }
+};
+
 export const MobileFullscreen = React.memo(
     ({ mask: Mask, children }: IMobileFullscreenProps) => {
         const [view, setView] = useState<View>("default");
@@ -50,20 +40,33 @@ export const MobileFullscreen = React.memo(
             null,
         );
 
-        // TODO: detect.
+        useEffect(() => {
+            if (nativeSupported) {
+                setFullscreenType("native");
+            } else {
+                setFullscreenType("minimal-ui");
+            }
+        }, []);
 
         return (
             <FullScreenBagContext.Provider
                 value={{ view, setView, fullscreenType, setFullscreenType }}
             >
                 {view === "default" && (
-                    <Container id="mask" zIndex={30}>
+                    <Container
+                        onClick={requestFullscreen}
+                        id="mask"
+                        zIndex={30}
+                    >
                         <Mask fullscreenType={fullscreenType} />
                     </Container>
                 )}
                 <Container id="main" zIndex={20}>
                     {children}
                 </Container>
+                {fullscreenType === "minimal-ui" && (
+                    <MinimalUI view={view} setView={setView} />
+                )}
             </FullScreenBagContext.Provider>
         );
     },
