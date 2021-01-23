@@ -8,6 +8,16 @@
         "type": "git",
         "url": "https://github.com/nothingkid/react-mobile-fullscreen.git"
     },
+    "keywords": [
+        "react",
+        "fulscreen",
+        "full screen",
+        "minimal ui",
+        "mobile",
+        "mobile fullscreen",
+        "mobile full screen",
+        "hide adress bar"
+    ],
     "source": "src/index.tsx",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
@@ -53,5 +63,8 @@
         "debounce": "^1.2.0",
         "fscreen": "^1.1.0",
         "is-mobile": "^2.2.2"
-    }
+    },
+    "files": [
+        "dist"
+    ]
 }
