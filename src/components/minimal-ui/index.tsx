@@ -13,7 +13,7 @@ const treadmillStyle: React.CSSProperties = {
     zIndex: 10,
     left: 0,
     width: "1px",
-    height: "1e+16px",
+    height: "9999999999999999px",
 };
 
 export const MinimalUI = (props: IMinimalUIProps) => {
@@ -44,7 +44,7 @@ export const MinimalUI = (props: IMinimalUIProps) => {
         mq.addListener(onResize);
 
         return () => {
-            window.addEventListener("resize", onResize);
+            window.removeEventListener("resize", onResize);
             mq.removeListener(onResize);
         };
     }, [setView, view]);
