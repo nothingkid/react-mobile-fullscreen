@@ -37,7 +37,7 @@ export const MobileFullscreen = React.memo(
 
         useEffect(() => {
             if (nativeSupported) {
-                setFullscreenType("minimal-ui");
+                setFullscreenType("native");
             } else {
                 setFullscreenType("minimal-ui");
             }

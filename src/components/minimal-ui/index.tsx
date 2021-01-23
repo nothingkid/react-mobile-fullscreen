@@ -27,6 +27,8 @@ export const MinimalUI = (props: IMinimalUIProps) => {
             if (mq.matches !== isLandscape) {
                 isLandscape = mq.matches;
                 // orientation changed;
+                // ensure app stays in "full" mode.
+                scrollTo(0, 1000);
             } else if (view === "full") {
                 if (window.innerHeight < windowHeight) {
                     setView("default");

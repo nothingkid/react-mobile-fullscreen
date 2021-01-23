@@ -1,7 +1,7 @@
 # React Mobile Fullscreen
 
 Lib tries to use native fullscreen api and only if api is not supported it fallbacks to use `MinimalUI` (name of react component used internally).
-minimal-ui (name of safari mode when adress bar is hidden) is what brim uses (https://github.com/gajus/brim), but unlike react-mobile-fullscreen, android devices are not supported by brim.
+minimal-ui (name of safari mode when adress bar is hidden) is what `brim` uses (https://github.com/gajus/brim), but unlike react-mobile-fullscreen, android devices are not supported by `brim`.
 
 If native fullscreen api is supported, then fullscreen can be activated from user action such as click.
 
