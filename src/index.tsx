@@ -47,7 +47,7 @@ export const MobileFullscreen = React.memo(
             <FullScreenBagContext.Provider
                 value={{ view, setView, fullscreenType, setFullscreenType }}
             >
-                {view === "default" && (
+                {view === "default" && fullscreenType !== null && (
                     <MaskContainer
                         nativeSupported={nativeSupported}
                         setView={setView}

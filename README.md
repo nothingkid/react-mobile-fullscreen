@@ -36,7 +36,7 @@ const Mask = (props: IMaskProps) => {
                 ? "Click Me!"
                 : props.fullscreenType === "minimal-ui"
                 ? "Swipe Up!"
-                : "Fullscreen is not available"}
+                : "Mask won't be rendered"}
         </div>
     );
 };
