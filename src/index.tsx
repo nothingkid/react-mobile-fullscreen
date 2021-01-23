@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import fscreen from "fscreen";
 import { FullScreenBagContext } from "./hooks/use-fullscreen-context";
 import { useState } from "react";
-import { Container } from "./components/container";
+import { MaskContainer } from "./components/mask-container";
 import { MinimalUI } from "./components/minimal-ui";
+import { Container } from "./components/container";
 
 export type RequestFullsreen = () => void;
 export type ExitFullscreen = () => void;
@@ -27,12 +28,6 @@ export interface IMobileFullscreenProps {
     children: React.ReactNode | React.ReactNodeArray;
 }
 
-const requestFullscreen = () => {
-    if (nativeSupported) {
-        fscreen.requestFullscreen(document.documentElement);
-    }
-};
-
 export const MobileFullscreen = React.memo(
     ({ mask: Mask, children }: IMobileFullscreenProps) => {
         const [view, setView] = useState<View>("default");
@@ -53,13 +48,14 @@ export const MobileFullscreen = React.memo(
                 value={{ view, setView, fullscreenType, setFullscreenType }}
             >
                 {view === "default" && (
-                    <Container
-                        onClick={requestFullscreen}
+                    <MaskContainer
+                        nativeSupported={nativeSupported}
+                        setView={setView}
                         id="mask"
                         zIndex={30}
                     >
                         <Mask fullscreenType={fullscreenType} />
-                    </Container>
+                    </MaskContainer>
                 )}
                 <Container id="main" zIndex={20}>
                     {children}

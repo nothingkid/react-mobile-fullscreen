@@ -9,14 +9,19 @@ const style: React.CSSProperties = {
     transform: "translateZ(0px)",
 };
 
-interface IMaskProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface IContainerProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
     zIndex: number;
 }
 
-export const Container = React.memo(({ children, zIndex, ...delegated }: IMaskProps) => {
+export const Container = React.memo((props: IContainerProps) => {
+    const { children, zIndex, ...delegated } = props;
+
     return (
-        <div {...delegated} style={{ ...style, zIndex }}>
+        <div
+            {...delegated}
+            style={{ ...style, zIndex }}
+        >
             {children}
         </div>
     );
