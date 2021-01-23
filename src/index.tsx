@@ -6,8 +6,8 @@ import { MaskContainer } from "./components/mask-container";
 import { MinimalUI } from "./components/minimal-ui";
 import { Container } from "./components/container";
 
-export type RequestFullsreen = () => void;
-export type ExitFullscreen = () => void;
+// export type RequestFullsreen = () => void;
+// export type ExitFullscreen = () => void;
 export type View = "full" | "default";
 export type FullscreenType = "native" | "minimal-ui" | null;
 
