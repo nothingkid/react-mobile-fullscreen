@@ -33,7 +33,7 @@ export const MinimalUI = (props: IMinimalUIProps) => {
                 }
             } else {
                 if (window.innerHeight > windowHeight) {
-                    setView("default");
+                    setView("full");
                 }
             }
 
